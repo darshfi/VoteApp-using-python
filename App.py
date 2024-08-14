@@ -117,7 +117,7 @@ root.title("Voting App")
 # Home Page
 def open_home_page():
     home_screen = tk.Frame(root)
-    home_screen.pack(padx=250, pady=250, fill="x")
+    home_screen.pack(padx=100, pady=100, fill="x")
 
     start_button = tk.Button(home_screen, text="Start Voting", command=open_voting_screen)
     start_button.pack(pady=20)
