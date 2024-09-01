@@ -48,22 +48,28 @@ def reset_roles_contestants():
 def submit_votes():
     global df_roles
     valid_vote = True
+    votes_to_add = []
+
     for idx, role in enumerate(df_roles['Role'].unique()):
         contestant = comboboxes[idx].get().strip()
         if contestant:
-            df_roles.loc[
-                (df_roles['Role'].str.lower() == role.lower()) & (df_roles['Contestant'] == contestant), 'Votes'] += 1
+            votes_to_add.append((role.lower(), contestant))  # Store the valid vote
         else:
             valid_vote = False
             break
 
     if valid_vote:
+        for role, contestant in votes_to_add:
+            df_roles.loc[
+                (df_roles['Role'].str.lower() == role) & (df_roles['Contestant'] == contestant), 'Votes'] += 1
+
         with pd.ExcelWriter('votes.xlsx') as writer:
             df_roles.to_excel(writer, sheet_name='Roles', index=False)
+
         messagebox.showinfo("Success", "Your votes have been submitted.")
         voting_screen.destroy()
     else:
-        messagebox.showerror("Error", "You must vote for at least one contestant in each role.")
+        messagebox.showerror("Error", "You must vote for a contestant in every role.")
 
 
 # Admin screen for adding candidates
@@ -109,15 +115,17 @@ def open_voting_screen():
     vote_button.grid(row=len(roles), column=0, columnspan=2, pady=10)
 
 
+# pyinstaller --onefile --windowed --icon=C:\Users\darsh\PycharmProjects\VoteApp\atul_logo.ico email_checker.py
 # Main window
 root = tk.Tk()
 root.title("Voting App")
 
 
+# pyinstaller --onefile --windowed --icon=C:\Users\darsh\PycharmProjects\VoteApp\atul_logo.ico email_checker.py
 # Home Page
 def open_home_page():
     home_screen = tk.Frame(root)
-    home_screen.pack(padx=100, pady=100, fill="x")
+    home_screen.pack(padx=100, pady=200, fill="x")
 
     start_button = tk.Button(home_screen, text="Start Voting", command=open_voting_screen)
     start_button.pack(pady=20)
