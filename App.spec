@@ -35,5 +35,4 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['C:\\Users\\darsh\\PycharmProjects\\VoteApp\\atul_logo.ico'],
 )
