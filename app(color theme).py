@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox, Menu
 import pandas as pd
 import os
-
+#pyinstaller --noconfirm --onefile --windowed --icon=atul_logo.ico BetterApp.py
 # Initialize or load the Excel file
 if not os.path.exists('votes.xlsx'):
     df_roles = pd.DataFrame(columns=["Role", "Contestant", "Votes"])
