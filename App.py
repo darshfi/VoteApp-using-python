@@ -43,7 +43,7 @@ class VotingApp:
                     pady=2)
 
     def load_data(self):
-        """ Load or create an Excel file for roles & contestants. """
+        """ Load or create an Excel file for roles and contestants. """
         if not self.file_path.exists():
             df = pd.DataFrame(columns=["Role", "Contestant", "Votes"])
             df.to_excel(self.file_path, sheet_name='Roles', index=False)
@@ -142,7 +142,7 @@ class VotingApp:
             pady=5)
 
     def open_voting_screen(self):
-        """ Open the voting screen with scrollable, modern grouped layout and horizontal radio buttons. """
+        """ Open the voting screen with scrollable, modern-grouped layout and horizontal radio buttons. """
         self.voting_screen = tk.Toplevel(self.root)
         self.voting_screen.title("Voting")
         self.voting_screen.attributes("-fullscreen", True)

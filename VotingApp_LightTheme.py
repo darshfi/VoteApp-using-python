@@ -10,6 +10,7 @@ import sys
 from pathlib import Path
 import json
 
+
 class VotingApp(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -115,20 +116,21 @@ class VotingApp(QMainWindow):
                 rb.setMinimumHeight(50)
                 rb.setStyleSheet("""
                     QRadioButton {
-                        background-color: #e2dfe9;
-                        color: black;
+                        background-color: #f5f5f5;
+                        color: #333333;
                         padding: 12px;
                         border-radius: 8px;
+                        border: 1px solid #d0d0d0;
                     }
                     QRadioButton::indicator {
                         width: 20px;
                         height: 20px;
                     }
                     QRadioButton:checked {
-                        background-color: #7e7e7e;
-                        color: white;
+                        background-color: #f0e6d2;
+                        color: #333333;
                         font-weight: bold;
-                        border: 2px solid #505080;
+                        border: 2px solid #d4af37;
                     }
                 """)
                 row_layout.addWidget(rb)
@@ -202,7 +204,8 @@ class VotingApp(QMainWindow):
 
         self.showFullScreen()
 
-        label = QLabel("This was all made by Darsh Patel who studies/studied in class 12th Sci in the batch of 2025-26.\nHe got this idea from Farah ma'am, worked on it alone first using java and showed it to Tanvi ma'am who was very suprised to see this because he never used to code before and out of nowhere he made an app.\nThen she helped him show it to Farah ma'am and principal ma'am and 2024 was the first year of new gen voting. That app was a bit crooked and not the best so a year later when the app was needed again Darsh decided to make it using python and then this beauty was built")
+        label = QLabel(
+            "This was all made by Darsh Patel who studies/studied in class 12th Sci in the batch of 2025-26.\nHe got this idea from Farah ma'am, worked on it alone first using java and showed it to Tanvi ma'am who was very suprised to see this because he never used to code before and out of nowhere he made an app.\nThen she helped him show it to Farah ma'am and principal ma'am and 2024 was the first year of new gen voting. That app was a bit crooked and not the best so a year later when the app was needed again Darsh decided to make it using python and then this beauty was built")
         label.setFont(QFont("Arial", 18, QFont.Weight.Bold))
         layout.addWidget(label, alignment=Qt.AlignmentFlag.AlignCenter)
 
@@ -221,7 +224,7 @@ class VotingApp(QMainWindow):
         self.about.setLayout(layout)
         self.stack.addWidget(self.about)
         self.stack.setCurrentWidget(self.about)
-    
+
     def admin_screen(self):
         admin = QWidget()
         layout = QFormLayout()
@@ -410,7 +413,8 @@ class VotingApp(QMainWindow):
         msg = QMessageBox(self)
         msg.setWindowTitle("Role Order")
         msg.setText("Do you want to reorder the roles?")
-        msg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No | QMessageBox.StandardButton.Cancel)
+        msg.setStandardButtons(
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No | QMessageBox.StandardButton.Cancel)
         msg.setDefaultButton(QMessageBox.StandardButton.No)
         response = msg.exec()
 
@@ -435,7 +439,8 @@ class VotingApp(QMainWindow):
 
         for role in self.role_order:
             item = QListWidgetItem(role)
-            item.setFlags(item.flags() | Qt.ItemFlag.ItemIsSelectable | Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsDragEnabled)
+            item.setFlags(
+                item.flags() | Qt.ItemFlag.ItemIsSelectable | Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsDragEnabled)
             self.role_list_widget.addItem(item)
 
         layout.addWidget(self.role_list_widget)
@@ -463,8 +468,9 @@ class VotingApp(QMainWindow):
         QMessageBox.information(self, "Saved", "Role order updated.")
         self.stack.setCurrentWidget(self.home)
 
+
 if __name__ == "__main__":
-    HIDDEN_SIGNATURE = "Made by Darsh Patel - 2025fi"
+    HIDDEN_SIGNATURE = "Made by Darsh Patel - 2025"
 
     app = QApplication(sys.argv)
 
@@ -472,49 +478,71 @@ if __name__ == "__main__":
 
     app.setStyle(QStyleFactory.create("Fusion"))
 
-    # Apply global stylesheet
+    # Apply global stylesheet with light theme and gold-toned buttons
     app.setStyleSheet("""
             QWidget {
-                background-color: #1e1e1e;
-                color: white;
+                background-color: #f8f8f8;
+                color: #333333;
                 font-family: "Segoe UI";
                 font-size: 14px;
             }
             QPushButton {
-                background-color: #333;
-                color: white;
+                background-color: #f5e6cc;
+                color: #333333;
                 padding: 8px 14px;
-                border: 1px solid #555;
+                border: 1px solid #d4af37;
                 border-radius: 6px;
+                font-weight: 500;
             }
             QPushButton:hover {
-                background-color: #444;
+                background-color: #f0ddb8;
+                border: 1px solid #c5a028;
+            }
+            QPushButton:pressed {
+                background-color: #e8d4a8;
             }
             QLineEdit, QComboBox {
-                background-color: #2c2c2c;
-                color: white;
-                border: 1px solid #555;
+                background-color: #ffffff;
+                color: #333333;
+                border: 1px solid #cccccc;
                 padding: 4px;
                 border-radius: 4px;
             }
+            QLineEdit:focus, QComboBox:focus {
+                border: 1px solid #d4af37;
+            }
             QLabel {
-                color: white;
+                color: #333333;
             }
             QGroupBox {
-                border: 1px solid #444;
+                border: 1px solid #d0d0d0;
                 border-radius: 8px;
                 margin-top: 10px;
                 padding: 8px;
+                background-color: #ffffff;
+            }
+            QGroupBox::title {
+                color: #333333;
             }
             QScrollArea {
-                background-color: #1e1e1e;
+                background-color: #f8f8f8;
+                border: none;
             }
             QMenuBar, QMenu {
-                background-color: #2d2d2d;
-                color: white;
+                background-color: #e8e8e8;
+                color: #333333;
             }
             QMenu::item:selected {
-                background-color: #444;
+                background-color: #f5e6cc;
+            }
+            QListWidget {
+                background-color: #ffffff;
+                color: #333333;
+                border: 1px solid #cccccc;
+            }
+            QListWidget::item:selected {
+                background-color: #f5e6cc;
+                color: #333333;
             }
         """)
 

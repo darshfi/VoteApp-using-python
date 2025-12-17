@@ -1,8 +1,8 @@
 # UTF-16LE encoded file
 VSVersionInfo(
   ffi=FixedFileInfo(
-    filevers=(1, 0, 0, 0),
-    prodvers=(1, 0, 0, 0),
+    filevers=(1, 6, 9, 11),
+    prodvers=(1, 6, 9, 11),
     mask=0x3f,
     flags=0x0,
     OS=0x4,
@@ -15,8 +15,8 @@ VSVersionInfo(
       StringTable(
         '040904B0',
         [StringStruct('CompanyName', 'darshfi'),
-         StringStruct('FileDescription', 'Voting App by Darsh Patel 12th Sci\(Batch of 2025-26\) for AV, made in 2025'),
-         StringStruct('InternalName', 'Voting app for AV'),
+         StringStruct('FileDescription', 'Voting App by Darsh Patel 12th Sci(Batch of 2025-26) for AV, made in 2025'),
+         StringStruct('InternalName', 'Voting App for AV'),
          StringStruct('OriginalFilename', 'VotingApp.exe'),
          StringStruct('ProductName', 'Voting App'),
          StringStruct('LegalCopyright', '© Darsh Patel 2025')])
