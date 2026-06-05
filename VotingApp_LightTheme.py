@@ -101,7 +101,7 @@ class VotingApp(QMainWindow):
 
         for role in self.role_order:
             role_group = QGroupBox(role)
-            role_group.setFont(QFont("Arial", 14, QFont.Weight.Bold))
+            role_group.setFont(QFont("Arial", 40, QFont.Weight.Bold))
             group_layout = QVBoxLayout()
 
             contestants = self.df_roles[self.df_roles['Role'] == role]['Contestant'].tolist()
@@ -112,25 +112,28 @@ class VotingApp(QMainWindow):
             row_layout = QHBoxLayout()
             for name in contestants:
                 rb = QRadioButton(name)
-                rb.setFont(QFont("Arial", 13))
-                rb.setMinimumHeight(50)
+                rb.setFont(QFont("Arial", 50))
+                rb.setMinimumHeight(80)
                 rb.setStyleSheet("""
                     QRadioButton {
                         background-color: #f5f5f5;
                         color: #333333;
-                        padding: 12px;
+                        padding: 15px;
                         border-radius: 8px;
                         border: 1px solid #d0d0d0;
+                        font-size: 30px;
+                        font-weight: bold;
                     }
                     QRadioButton::indicator {
-                        width: 20px;
-                        height: 20px;
+                        width: 40px;
+                        height: 40px;
                     }
                     QRadioButton:checked {
                         background-color: #f0e6d2;
                         color: #333333;
                         font-weight: bold;
                         border: 2px solid #d4af37;
+                        font-size: 30px;
                     }
                 """)
                 row_layout.addWidget(rb)
@@ -286,14 +289,12 @@ class VotingApp(QMainWindow):
         self.stack.addWidget(admin)
         self.stack.setCurrentWidget(admin)
 
-    # Function to update candidate list dropdown based on selected role
     def update_candidate_list(self):
         role = self.role_select_for_candidate.currentText()
         candidates = self.df_roles[self.df_roles['Role'] == role]['Contestant'].tolist()
         self.candidate_select_combo.clear()
         self.candidate_select_combo.addItems(candidates)
 
-    # Function to delete a role
     def delete_role(self):
         role = self.role_delete_combo.currentText()
         self.df_roles = self.df_roles[self.df_roles['Role'] != role]
@@ -302,9 +303,8 @@ class VotingApp(QMainWindow):
         self.save_data()
         self.save_role_order()
         QMessageBox.information(self, "Deleted", f"Role '{role}' deleted.")
-        self.admin_screen()  # Refresh UI
+        self.admin_screen()
 
-    # Function to delete a candidate
     def delete_candidate(self):
         role = self.role_select_for_candidate.currentText()
         candidate = self.candidate_select_combo.currentText()
@@ -317,9 +317,8 @@ class VotingApp(QMainWindow):
             ~((self.df_roles['Role'] == role) & (self.df_roles['Contestant'] == candidate))]
         self.save_data()
         QMessageBox.information(self, "Deleted", f"Candidate '{candidate}' from '{role}' deleted.")
-        self.admin_screen()  # Refresh UI
+        self.admin_screen()
 
-    # Update `add_contestant()` to auto-add NOTA if not already there and always last
     def add_contestant(self):
         role = self.role_input.text().strip().title()
         contestant = self.contestant_input.text().strip().title()
@@ -351,11 +350,12 @@ class VotingApp(QMainWindow):
                 pd.DataFrame([[role, "NOTA", 0]], columns=["Role", "Contestant", "Votes"])
             ], ignore_index=True)
 
-        # Ensure NOTA is last in visual order (important for radio layout)
+        # Ensure NOTA is last in visual order
         self.df_roles = self.df_roles.sort_values(
             by=["Role", "Contestant"], key=lambda x: x.str.upper().ne("NOTA"), ignore_index=True)
 
         self.save_data()
+        self.save_role_order()
         self.role_input.clear()
         self.contestant_input.clear()
 
@@ -423,7 +423,6 @@ class VotingApp(QMainWindow):
         elif response == QMessageBox.StandardButton.No:
             self.save_role_order()
             self.stack.setCurrentWidget(self.home)
-        # Cancel does nothing
 
     def reorder_screen(self):
         self.reorder = QWidget()
@@ -520,9 +519,12 @@ if __name__ == "__main__":
                 margin-top: 10px;
                 padding: 8px;
                 background-color: #ffffff;
+                font-size: 40px;
+                font-weight: bold;
             }
             QGroupBox::title {
                 color: #333333;
+                font-size: 40px;
             }
             QScrollArea {
                 background-color: #f8f8f8;
